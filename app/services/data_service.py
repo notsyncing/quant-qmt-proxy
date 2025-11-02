@@ -105,7 +105,12 @@ class DataService:
                 try:
                     connect_result['client'] = xtdata.connect()
                 except Exception as e:
-                    connect_result['error'] = e
+                    logger.info(f"xtdata connect 方法失败，尝试 get_client 方法: {e}")
+
+                    try:
+                        connect_result['client'] = xtdata.get_client()
+                    except Exception as e2:
+                        connect_result['error'] = e2
             
             # 在后台线程中尝试连接，避免阻塞主线程
             connect_thread = threading.Thread(target=try_connect, daemon=True)
