@@ -646,7 +646,7 @@ class DataService:
                 if stock_code in data:
                     tables = data[stock_code]
                     if isinstance(tables, dict) and table_name in tables:
-                        df = tables[table_name]
+                        df = tables[table_name].fillna(value='')
                         
                         # 检查DataFrame是否为空
                         if hasattr(df, 'empty') and df.empty:
