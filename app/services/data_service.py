@@ -231,6 +231,16 @@ class DataService:
         logger.debug(f"使用真实数据: {self._should_use_real_data()}")
         
         try:
+            if self._should_use_real_data():
+                logger.debug("正在下载财务数据...")
+
+                xtdata.download_financial_data2(
+                    request.stock_codes,
+                    table_list=request.table_list,
+                    start_time=request.start_date,
+                    end_time=request.end_date
+                )
+
             results = []
             for stock_code in request.stock_codes:
                 for table_name in request.table_list:
