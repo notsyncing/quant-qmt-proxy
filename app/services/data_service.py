@@ -291,6 +291,7 @@ class DataService:
             if self._should_use_real_data():
                 # 使用真实xtdata接口
                 try:
+                    xtdata.download_sector_data()
                     sectors = xtdata.get_sector_list()
                     results = []
                     for sector_name in sectors:
