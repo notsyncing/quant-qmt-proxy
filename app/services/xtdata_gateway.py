@@ -141,7 +141,12 @@ class XtDataGateway:
         try:
             result["client"] = xtdata.connect()
         except Exception as exc:
-            result["error"] = exc
+            logger.info(f"xtdata connect 方法失败，尝试 get_client 方法：{exc}")
+
+            try:
+                result["client"] = xtdata.get_client()
+            except Exception as exc2:
+                result["error"] = exc2
 
         error = result["error"]
         if error is not None:
