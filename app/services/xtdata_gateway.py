@@ -216,6 +216,10 @@ class XtDataGateway:
         if self._is_mock_mode():
             return self._mock_kline_history(query)
         self.ensure_ready()
+
+        for symbol in query.symbols:
+            xtdata.download_history_data(symbol, query.period, query.start_time, query.end_time)
+
         raw = xtdata.get_market_data(
             field_list=query.fields,
             stock_list=query.symbols,
