@@ -339,6 +339,7 @@ class XtDataGateway:
         if self._is_mock_mode():
             return [{"sector_name": "Mock Sector", "symbols": ["000001.SZ", "600000.SH"]}]
         self.ensure_ready()
+        xtdata.download_sector_data()
         sectors = xtdata.get_sector_list() or []
         result = []
         for sector_name in sectors:
